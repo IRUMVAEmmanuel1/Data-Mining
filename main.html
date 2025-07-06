@@ -1,0 +1,1858 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Introduction to Statistical Learning - Complete Summary</title>
+<style>
+        /* CSS Variables using the provided color palette */
+        :root {
+            --primary-green: #0EBD60;
+            --dark-green: #184C34;
+            --light-green: #CAD1C9;
+            --very-light-green: #EFF4ED;
+            --white: #ffffff;
+            --dark-text: #1f2937;
+            --light-text: #6b7280;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --border-radius: 12px;
+        }
+
+        /* Global Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark-text);
+            background-color: var(--very-light-green);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1.5rem;
+        }
+
+        .course-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-top: 2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        /* Navigation */
+        nav {
+            background: var(--white);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow);
+        }
+
+        .nav-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--dark-text);
+            text-decoration: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            border: 2px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background: var(--primary-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        /* Main Content */
+        main {
+            padding: 2rem 0;
+        }
+
+        section {
+            background: var(--white);
+            margin: 2rem 0;
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--shadow);
+        }
+
+        h2 {
+            color: var(--dark-green);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            border-bottom: 3px solid var(--primary-green);
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: var(--primary-green);
+            font-size: 1.5rem;
+            margin: 1.5rem 0 1rem 0;
+        }
+
+        h4 {
+            color: var(--dark-green);
+            font-size: 1.2rem;
+            margin: 1rem 0 0.5rem 0;
+        }
+
+        /* Book Overview */
+        .overview-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--dark-text);
+        }
+
+        .overview-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Table of Contents */
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .toc-item {
+            background: linear-gradient(135deg, var(--light-green), var(--very-light-green));
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            text-align: center;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .toc-item:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-green);
+            box-shadow: var(--shadow);
+        }
+
+        .toc-number {
+            background: var(--primary-green);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            margin: 0 auto 1rem;
+            font-size: 1.1rem;
+        }
+
+        .toc-title {
+            font-weight: 600;
+            color: var(--dark-text);
+        }
+
+        /* Chapter Sections */
+        .chapter-section {
+            border-left: 5px solid var(--primary-green);
+            padding-left: 2rem;
+            margin: 2rem 0;
+        }
+
+        .chapter-header {
+            background: var(--very-light-green);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: var(--primary-green);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .chapter-title {
+            font-size: 1.8rem;
+            color: var(--dark-green);
+            margin-bottom: 0.5rem;
+        }
+
+        .chapter-content {
+            line-height: 1.7;
+        }
+
+        .chapter-content p {
+            margin-bottom: 1rem;
+        }
+
+        /* Key Concepts */
+        .key-concepts {
+            background: var(--very-light-green);
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin: 1.5rem 0;
+        }
+
+        .key-concepts h4 {
+            color: var(--dark-green);
+            margin-bottom: 1rem;
+        }
+
+        .concepts-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .concept-tag {
+            background: var(--primary-green);
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: transform 0.2s ease;
+        }
+
+        .concept-tag:hover {
+            transform: scale(1.05);
+            background: var(--dark-green);
+        }
+
+        /* Techniques and Takeaways */
+        .techniques-takeaways {
+            margin: 1.5rem 0;
+        }
+
+        .techniques-takeaways ul, .techniques-takeaways ol {
+            margin-left: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .techniques-takeaways li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* GitHub Links */
+        .github-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--dark-green);
+            color: white;
+            text-decoration: none;
+            padding: 1rem 2rem;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin: 1rem 0;
+        }
+
+        .github-link:hover {
+            background: var(--primary-green);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .github-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Algorithm Lists */
+        .algorithms-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .algorithm-category {
+            background: var(--white);
+            border: 2px solid var(--light-green);
+            border-radius: var(--border-radius);
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .algorithm-category:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+            border-color: var(--primary-green);
+        }
+
+        .category-title {
+            color: var(--dark-green);
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-icon {
+            width: 24px;
+            height: 24px;
+            fill: var(--primary-green);
+        }
+
+        .algorithm-list {
+            list-style: none;
+        }
+
+        .algorithm-list li {
+            padding: 0.7rem 0;
+            border-bottom: 1px solid var(--light-green);
+            transition: all 0.2s ease;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .algorithm-list li:before {
+            content: "▶";
+            color: var(--primary-green);
+            position: absolute;
+            left: 0;
+            font-size: 0.8rem;
+        }
+
+        .algorithm-list li:hover {
+            background: var(--very-light-green);
+            padding-left: 1.5rem;
+            border-radius: 5px;
+        }
+
+        .algorithm-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark-green);
+            color: white;
+            text-align: center;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: var(--primary-green);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links a {
+            color: #d1d5db;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-green);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .nav-links {
+                gap: 0.5rem;
+            }
+            
+            .nav-links a {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            .algorithms-section {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chapter-section {
+            animation: fadeIn 0.6s ease forwards;
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+<!-- Header Section -->
+<header>
+<div class="container">
+<h1>Introduction to Statistical Learning</h1>
+<p class="subtitle">A Comprehensive Summary with Applications in Python</p>
+<div class="course-info">
+<h3>MSDA9223 - Data Mining and Information Retrieval</h3>
+<p><strong>Academic Year:</strong> 2024-2025, Semester 2</p>
+<p><strong>Instructor:</strong> Dr. Pacifique Nizeyimana</p>
+<p><strong>Institution:</strong> Adventist University of Central Africa</p>
+<p><strong>Date:</strong> July 6th, 2025</p>
+</div>
+</div>
+</header>
+<!-- Navigation Menu -->
+<nav>
+<div class="container">
+<ul class="nav-links">
+<li><a href="#overview">Book Overview</a></li>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#chapters">Chapter Summaries</a></li>
+<li><a href="#algorithms">Algorithm Lists</a></li>
+<li><a href="#github-repository">GitHub Repository</a></li>
+</ul>
+</div>
+</nav>
+<main>
+<div class="container">
+<!-- 1. Book Overview (Requirement 1) -->
+<section id="overview">
+<h2>Book Overview</h2>
+<div class="overview-content">
+<p>
+<strong>"Introduction to Statistical Learning with Applications in Python"</strong> is a comprehensive textbook that provides an accessible yet thorough treatment of statistical learning methods. Written by Gareth James, Daniela Witten, Trevor Hastie, Robert Tibshirani, and Jonathan Taylor, this book serves as the perfect bridge between theoretical concepts and practical applications for students and practitioners in diverse fields including business, biology, computer science, and quantitative research.
+                    </p>
+<p>
+                        The book is built on four fundamental premises: (1) Statistical learning methods are widely applicable across academic and non-academic disciplines, (2) Methods should not be treated as black boxes but understood in terms of their assumptions and trade-offs, (3) Technical implementation details are less important than understanding what each method accomplishes, and (4) Real-world applications are essential, with each chapter including computer labs that walk through realistic applications using Python.
+                    </p>
+<p>
+                        This Python edition modernizes the original R-based book, providing implementations using popular Python libraries including scikit-learn, pandas, numpy, and the specialized ISLP package. The book covers both supervised learning (regression and classification) and unsupervised learning methods, progressing from classical approaches like linear regression to modern techniques including deep learning and ensemble methods.
+                    </p>
+</div>
+</section>
+<!-- 2. Table of Contents (Requirement 2) -->
+<section id="table-of-contents">
+<h2>Table of Contents - Chapters Covered in Class</h2>
+<div class="toc-grid">
+<div class="toc-item" onclick="location.href='#chapter-1'">
+<div class="toc-number">1</div>
+<div class="toc-title">Introduction</div>
+</div>
+<div class="toc-item" onclick="location.href='#chapter-2'">
+<div class="toc-number">2</div>
+<div class="toc-title">Linear Regression</div>
+</div>
+<div class="toc-item" onclick="location.href='#chapter-3'">
+<div class="toc-number">3</div>
+<div class="toc-title">Classification</div>
+</div>
+<div class="toc-item" onclick="location.href='#chapter-4'">
+<div class="toc-number">4</div>
+<div class="toc-title">Resampling Methods</div>
+</div>
+<div class="toc-item" onclick="location.href='#chapter-5'">
+<div class="toc-number">5</div>
+<div class="toc-title">Linear Model Selection and Regularization</div>
+</div>
+<div class="toc-item" onclick="location.href='#chapter-6'">
+<div class="toc-number">6</div>
+<div class="toc-title">Tree-based Methods</div>
+</div>
+<div class="toc-item" onclick="location.href='#chapter-7'">
+<div class="toc-number">7</div>
+<div class="toc-title">Support Vector Machine</div>
+</div>
+<div class="toc-item" onclick="location.href='#chapter-8'">
+<div class="toc-number">8</div>
+<div class="toc-title">Deep Learning</div>
+</div>
+<div class="toc-item" onclick="location.href='#chapter-9'">
+<div class="toc-number">9</div>
+<div class="toc-title">Unsupervised Learning</div>
+</div>
+<div class="toc-item" onclick="location.href='#chapter-10'">
+<div class="toc-number">10</div>
+<div class="toc-title">Text Mining</div>
+</div>
+</div>
+</section>
+<!-- 3. Chapter Summaries (Requirements 3, 4, 5) -->
+<section id="chapters">
+<h2> Chapter Summaries</h2>
+<!-- Chapter 1: Introduction -->
+
+<!-- Chapter 10: Text Mining -->
+
+<article class="chapter-section" id="chapter-1">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 1</span>
+<h3 class="chapter-title">Introduction</h3>
+</div>
+<div class="chapter-content">
+<p>
+                            This foundational chapter establishes the framework for statistical learning by introducing key concepts, terminology, and the fundamental distinction between supervised and unsupervised learning. It sets the stage for understanding when and why to apply different statistical learning methods.
+                        </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Statistical Learning</span>
+<span class="concept-tag">Supervised Learning</span>
+<span class="concept-tag">Unsupervised Learning</span>
+<span class="concept-tag">Prediction vs Inference</span>
+<span class="concept-tag">Bias-Variance Trade-off</span>
+<span class="concept-tag">Model Flexibility</span>
+<span class="concept-tag">Parametric vs Non-parametric</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Function Estimation:</strong> Understanding how statistical learning estimates the relationship f between predictors X and response Y</li>
+<li><strong>Prediction Accuracy vs Model Interpretability:</strong> The fundamental trade-off between how well a model predicts and how easily it can be understood</li>
+<li><strong>Bias-Variance Decomposition:</strong> Breaking down prediction error into irreducible error, bias², and variance components</li>
+<li><strong>Overfitting and Underfitting:</strong> Understanding when models are too complex or too simple for the underlying data patterns</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>No single method works best for all problems - the choice depends on the specific application and data characteristics</li>
+<li>More flexible methods are not always better - they can lead to overfitting with small sample sizes</li>
+<li>Understanding the bias-variance trade-off is crucial for selecting appropriate methods</li>
+<li>The goal (prediction vs inference) should guide method selection</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter3">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                            Chapter 9 Lab Notebook
+                        </a>
+</div>
+</article><article class="chapter-section" id="chapter-1">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 1</span>
+<h3 class="chapter-title">Introduction</h3>
+</div>
+<div class="chapter-content">
+<p>
+                        This foundational chapter establishes the framework for statistical learning by introducing key concepts, terminology, and the fundamental distinction between supervised and unsupervised learning. It sets the stage for understanding when and why to apply different statistical learning methods.
+                    </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Statistical Learning</span>
+<span class="concept-tag">Supervised Learning</span>
+<span class="concept-tag">Unsupervised Learning</span>
+<span class="concept-tag">Prediction vs Inference</span>
+<span class="concept-tag">Bias-Variance Trade-off</span>
+<span class="concept-tag">Model Flexibility</span>
+<span class="concept-tag">Parametric vs Non-parametric</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Function Estimation:</strong> Understanding how statistical learning estimates the relationship f between predictors X and response Y</li>
+<li><strong>Prediction Accuracy vs Model Interpretability:</strong> The fundamental trade-off between how well a model predicts and how easily it can be understood</li>
+<li><strong>Bias-Variance Decomposition:</strong> Breaking down prediction error into irreducible error, bias², and variance components</li>
+<li><strong>Overfitting and Underfitting:</strong> Understanding when models are too complex or too simple for the underlying data patterns</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>No single method works best for all problems - the choice depends on the specific application and data characteristics</li>
+<li>More flexible methods are not always better - they can lead to overfitting with small sample sizes</li>
+<li>Understanding the bias-variance trade-off is crucial for selecting appropriate methods</li>
+<li>The goal (prediction vs inference) should guide method selection</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter1">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                        Chapter 1 Lab Notebook
+                    </a>
+</div>
+</article><article class="chapter-section" id="chapter-2">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 2</span>
+<h3 class="chapter-title">Linear Regression</h3>
+</div>
+<div class="chapter-content">
+<p>
+                      Linear regression serves as the fundamental building block for supervised learning. This chapter covers simple and multiple linear regression, providing the mathematical foundation and practical tools for predicting quantitative responses. Despite its simplicity, linear regression remains one of the most widely used and interpretable methods in statistical learning.
+                  </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Simple Linear Regression</span>
+<span class="concept-tag">Multiple Linear Regression</span>
+<span class="concept-tag">Least Squares Estimation</span>
+<span class="concept-tag">R-squared</span>
+<span class="concept-tag">F-statistic</span>
+<span class="concept-tag">Interaction Terms</span>
+<span class="concept-tag">Polynomial Regression</span>
+<span class="concept-tag">Qualitative Predictors</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Least Squares Method:</strong> Minimizing the sum of squared residuals to estimate regression coefficients</li>
+<li><strong>Coefficient Interpretation:</strong> Understanding how to interpret β₀ (intercept) and β₁, β₂, ..., βₚ (slopes) in different contexts</li>
+<li><strong>Model Assessment:</strong> Using RSE, R², adjusted R², and F-statistic to evaluate model quality</li>
+<li><strong>Hypothesis Testing:</strong> Testing individual coefficients (t-tests) and overall model significance (F-test)</li>
+<li><strong>Confidence and Prediction Intervals:</strong> Quantifying uncertainty in coefficient estimates and predictions</li>
+<li><strong>Extensions:</strong> Handling categorical predictors, interaction effects, and polynomial terms</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Linear regression assumes a linear relationship between predictors and response</li>
+<li>The method is highly interpretable but may be too rigid for complex relationships</li>
+<li>Interaction terms and polynomial features can capture non-linear patterns</li>
+<li>Residual analysis is crucial for validating model assumptions</li>
+<li>Multicollinearity among predictors can destabilize coefficient estimates</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter2">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                      Chapter 2 Lab Notebook
+                  </a>
+</div>
+</article><article class="chapter-section" id="chapter-2">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 2</span>
+<h3 class="chapter-title">Linear Regression</h3>
+</div>
+<div class="chapter-content">
+<p>
+                        Linear regression serves as the fundamental building block for supervised learning. This chapter covers simple and multiple linear regression, providing the mathematical foundation and practical tools for predicting quantitative responses. Despite its simplicity, linear regression remains one of the most widely used and interpretable methods in statistical learning.
+                    </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Simple Linear Regression</span>
+<span class="concept-tag">Multiple Linear Regression</span>
+<span class="concept-tag">Least Squares Estimation</span>
+<span class="concept-tag">R-squared</span>
+<span class="concept-tag">F-statistic</span>
+<span class="concept-tag">Interaction Terms</span>
+<span class="concept-tag">Polynomial Regression</span>
+<span class="concept-tag">Qualitative Predictors</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Least Squares Method:</strong> Minimizing the sum of squared residuals to estimate regression coefficients</li>
+<li><strong>Coefficient Interpretation:</strong> Understanding how to interpret β₀ (intercept) and β₁, β₂, ..., βₚ (slopes) in different contexts</li>
+<li><strong>Model Assessment:</strong> Using RSE, R², adjusted R², and F-statistic to evaluate model quality</li>
+<li><strong>Hypothesis Testing:</strong> Testing individual coefficients (t-tests) and overall model significance (F-test)</li>
+<li><strong>Confidence and Prediction Intervals:</strong> Quantifying uncertainty in coefficient estimates and predictions</li>
+<li><strong>Extensions:</strong> Handling categorical predictors, interaction effects, and polynomial terms</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Linear regression assumes a linear relationship between predictors and response</li>
+<li>The method is highly interpretable but may be too rigid for complex relationships</li>
+<li>Interaction terms and polynomial features can capture non-linear patterns</li>
+<li>Residual analysis is crucial for validating model assumptions</li>
+<li>Multicollinearity among predictors can destabilize coefficient estimates</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter2">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                        Chapter 2 Lab Notebook
+                    </a>
+</div>
+</article><article class="chapter-section" id="chapter-3">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 3</span>
+<h3 class="chapter-title">Classification</h3>
+</div>
+<div class="chapter-content">
+<p>
+                      Classification extends supervised learning to qualitative response variables. This chapter introduces fundamental classification methods including logistic regression, linear discriminant analysis, quadratic discriminant analysis, naive Bayes, and K-nearest neighbors. Each method has different assumptions and is suitable for different types of problems.
+                  </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Logistic Regression</span>
+<span class="concept-tag">Linear Discriminant Analysis</span>
+<span class="concept-tag">Quadratic Discriminant Analysis</span>
+<span class="concept-tag">Naive Bayes</span>
+<span class="concept-tag">K-Nearest Neighbors</span>
+<span class="concept-tag">Bayes' Theorem</span>
+<span class="concept-tag">Decision Boundaries</span>
+<span class="concept-tag">ROC Curves</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Logistic Regression:</strong> Using the logistic function to model probabilities and make classifications</li>
+<li><strong>Linear Discriminant Analysis (LDA):</strong> Assuming normal distributions with common covariance to find linear decision boundaries</li>
+<li><strong>Quadratic Discriminant Analysis (QDA):</strong> Allowing different covariances per class for quadratic decision boundaries</li>
+<li><strong>Naive Bayes:</strong> Making strong independence assumptions to simplify probability calculations</li>
+<li><strong>K-Nearest Neighbors:</strong> Non-parametric classification based on local neighborhoods</li>
+<li><strong>Performance Evaluation:</strong> Using confusion matrices, sensitivity, specificity, and ROC curves</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Logistic regression is highly interpretable and works well when decision boundary is roughly linear</li>
+<li>LDA performs well when classes are well-separated and assumption of normality holds</li>
+<li>QDA is more flexible than LDA but requires more data to estimate additional parameters</li>
+<li>Naive Bayes works surprisingly well despite strong independence assumptions</li>
+<li>KNN is simple and flexible but can be unstable and computationally expensive</li>
+<li>No single method dominates - choice depends on data characteristics and sample size</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter3">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                      Chapter 3 Lab Notebook
+                  </a>
+</div>
+</article><article class="chapter-section" id="chapter-3">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 3</span>
+<h3 class="chapter-title">Classification</h3>
+</div>
+<div class="chapter-content">
+<p>
+                        Classification extends supervised learning to qualitative response variables. This chapter introduces fundamental classification methods including logistic regression, linear discriminant analysis, quadratic discriminant analysis, naive Bayes, and K-nearest neighbors. Each method has different assumptions and is suitable for different types of problems.
+                    </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Logistic Regression</span>
+<span class="concept-tag">Linear Discriminant Analysis</span>
+<span class="concept-tag">Quadratic Discriminant Analysis</span>
+<span class="concept-tag">Naive Bayes</span>
+<span class="concept-tag">K-Nearest Neighbors</span>
+<span class="concept-tag">Bayes' Theorem</span>
+<span class="concept-tag">Decision Boundaries</span>
+<span class="concept-tag">ROC Curves</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Logistic Regression:</strong> Using the logistic function to model probabilities and make classifications</li>
+<li><strong>Linear Discriminant Analysis (LDA):</strong> Assuming normal distributions with common covariance to find linear decision boundaries</li>
+<li><strong>Quadratic Discriminant Analysis (QDA):</strong> Allowing different covariances per class for quadratic decision boundaries</li>
+<li><strong>Naive Bayes:</strong> Making strong independence assumptions to simplify probability calculations</li>
+<li><strong>K-Nearest Neighbors:</strong> Non-parametric classification based on local neighborhoods</li>
+<li><strong>Performance Evaluation:</strong> Using confusion matrices, sensitivity, specificity, and ROC curves</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Logistic regression is highly interpretable and works well when decision boundary is roughly linear</li>
+<li>LDA performs well when classes are well-separated and assumption of normality holds</li>
+<li>QDA is more flexible than LDA but requires more data to estimate additional parameters</li>
+<li>Naive Bayes works surprisingly well despite strong independence assumptions</li>
+<li>KNN is simple and flexible but can be unstable and computationally expensive</li>
+<li>No single method dominates - choice depends on data characteristics and sample size</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter3">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                        Chapter 3 Lab Notebook
+                    </a>
+</div>
+</article><article class="chapter-section" id="chapter-4">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 4</span>
+<h3 class="chapter-title">Resampling Methods</h3>
+</div>
+<div class="chapter-content">
+<p>
+                      Resampling methods are essential tools for model assessment and selection. This chapter covers cross-validation and bootstrap methods, which allow us to estimate test error and assess the uncertainty of our parameter estimates without requiring additional test data.
+                  </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Cross-Validation</span>
+<span class="concept-tag">Bootstrap</span>
+<span class="concept-tag">Validation Set Approach</span>
+<span class="concept-tag">LOOCV</span>
+<span class="concept-tag">K-Fold CV</span>
+<span class="concept-tag">Model Assessment</span>
+<span class="concept-tag">Model Selection</span>
+<span class="concept-tag">Standard Error Estimation</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Validation Set Approach:</strong> Simple train/validation split to estimate test error</li>
+<li><strong>Leave-One-Out Cross-Validation (LOOCV):</strong> Using n-1 observations for training and 1 for validation</li>
+<li><strong>K-Fold Cross-Validation:</strong> Splitting data into k folds and averaging k estimates of test error</li>
+<li><strong>Bootstrap Sampling:</strong> Resampling with replacement to estimate sampling distributions</li>
+<li><strong>Bias-Variance Trade-off in CV:</strong> Understanding how different CV methods balance bias and variance</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Cross-validation provides more reliable estimates of test error than simple validation sets</li>
+<li>LOOCV has low bias but high variance; K-fold CV (K=5 or 10) often provides better bias-variance trade-off</li>
+<li>Bootstrap is particularly useful for estimating standard errors of complex statistics</li>
+<li>Resampling methods are computationally intensive but provide valuable insights into model performance</li>
+<li>These methods are essential for comparing models and selecting hyperparameters</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter4">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                      Chapter 4 Lab Notebook
+                  </a>
+</div>
+</article><article class="chapter-section" id="chapter-4">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 4</span>
+<h3 class="chapter-title">Resampling Methods</h3>
+</div>
+<div class="chapter-content">
+<p>
+                            Resampling methods are essential tools for model assessment and selection. This chapter covers cross-validation and bootstrap methods, which allow us to estimate test error and assess the uncertainty of our parameter estimates without requiring additional test data.
+                        </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Cross-Validation</span>
+<span class="concept-tag">Bootstrap</span>
+<span class="concept-tag">Validation Set Approach</span>
+<span class="concept-tag">LOOCV</span>
+<span class="concept-tag">K-Fold CV</span>
+<span class="concept-tag">Model Assessment</span>
+<span class="concept-tag">Model Selection</span>
+<span class="concept-tag">Standard Error Estimation</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Validation Set Approach:</strong> Simple train/validation split to estimate test error</li>
+<li><strong>Leave-One-Out Cross-Validation (LOOCV):</strong> Using n-1 observations for training and 1 for validation</li>
+<li><strong>K-Fold Cross-Validation:</strong> Splitting data into k folds and averaging k estimates of test error</li>
+<li><strong>Bootstrap Sampling:</strong> Resampling with replacement to estimate sampling distributions</li>
+<li><strong>Bias-Variance Trade-off in CV:</strong> Understanding how different CV methods balance bias and variance</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Cross-validation provides more reliable estimates of test error than simple validation sets</li>
+<li>LOOCV has low bias but high variance; K-fold CV (K=5 or 10) often provides better bias-variance trade-off</li>
+<li>Bootstrap is particularly useful for estimating standard errors of complex statistics</li>
+<li>Resampling methods are computationally intensive but provide valuable insights into model performance</li>
+<li>These methods are essential for comparing models and selecting hyperparameters</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter4">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                            Chapter 4 Lab Notebook
+                        </a>
+</div>
+</article><article class="chapter-section" id="chapter-5">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 5</span>
+<h3 class="chapter-title">Linear Model Selection and Regularization</h3>
+</div>
+<div class="chapter-content">
+<p>
+                      This chapter extends linear models beyond ordinary least squares by introducing methods for automatic feature selection and regularization. These techniques are crucial when dealing with high-dimensional data where the number of predictors may be large relative to the number of observations.
+                  </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Subset Selection</span>
+<span class="concept-tag">Ridge Regression</span>
+<span class="concept-tag">Lasso</span>
+<span class="concept-tag">Elastic Net</span>
+<span class="concept-tag">Principal Components Regression</span>
+<span class="concept-tag">Partial Least Squares</span>
+<span class="concept-tag">Regularization</span>
+<span class="concept-tag">High-Dimensional Data</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Best Subset Selection:</strong> Considering all possible combinations of predictors (computationally intensive)</li>
+<li><strong>Forward/Backward Stepwise Selection:</strong> Greedy algorithms for selecting predictors</li>
+<li><strong>Ridge Regression:</strong> L2 penalty that shrinks coefficients toward zero but keeps all predictors</li>
+<li><strong>Lasso Regression:</strong> L1 penalty that can shrink coefficients exactly to zero, performing automatic feature selection</li>
+<li><strong>Elastic Net:</strong> Combines L1 and L2 penalties to get benefits of both ridge and lasso</li>
+<li><strong>Dimension Reduction:</strong> PCR and PLS project predictors onto lower-dimensional spaces</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Regularization methods can improve prediction accuracy by reducing overfitting</li>
+<li>Ridge regression works well when many predictors have small-to-moderate sized effects</li>
+<li>Lasso performs automatic feature selection and works well when many predictors are irrelevant</li>
+<li>Cross-validation is essential for choosing regularization parameters (λ)</li>
+<li>These methods are particularly valuable in high-dimensional settings where p &gt; n</li>
+<li>Standardization of predictors is crucial before applying regularization</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter5">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                      Chapter 5 Lab Notebook
+                  </a>
+</div>
+</article><article class="chapter-section" id="chapter-5">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 5</span>
+<h3 class="chapter-title">Linear Model Selection and Regularization</h3>
+</div>
+<div class="chapter-content">
+<p>
+                            This chapter extends linear models beyond ordinary least squares by introducing methods for automatic feature selection and regularization. These techniques are crucial when dealing with high-dimensional data where the number of predictors may be large relative to the number of observations.
+                        </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Subset Selection</span>
+<span class="concept-tag">Ridge Regression</span>
+<span class="concept-tag">Lasso</span>
+<span class="concept-tag">Elastic Net</span>
+<span class="concept-tag">Principal Components Regression</span>
+<span class="concept-tag">Partial Least Squares</span>
+<span class="concept-tag">Regularization</span>
+<span class="concept-tag">High-Dimensional Data</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Best Subset Selection:</strong> Considering all possible combinations of predictors (computationally intensive)</li>
+<li><strong>Forward/Backward Stepwise Selection:</strong> Greedy algorithms for selecting predictors</li>
+<li><strong>Ridge Regression:</strong> L2 penalty that shrinks coefficients toward zero but keeps all predictors</li>
+<li><strong>Lasso Regression:</strong> L1 penalty that can shrink coefficients exactly to zero, performing automatic feature selection</li>
+<li><strong>Elastic Net:</strong> Combines L1 and L2 penalties to get benefits of both ridge and lasso</li>
+<li><strong>Dimension Reduction:</strong> PCR and PLS project predictors onto lower-dimensional spaces</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Regularization methods can improve prediction accuracy by reducing overfitting</li>
+<li>Ridge regression works well when many predictors have small-to-moderate sized effects</li>
+<li>Lasso performs automatic feature selection and works well when many predictors are irrelevant</li>
+<li>Cross-validation is essential for choosing regularization parameters (λ)</li>
+<li>These methods are particularly valuable in high-dimensional settings where p &gt; n</li>
+<li>Standardization of predictors is crucial before applying regularization</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter5">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                            Chapter 5 Lab Notebook
+                        </a>
+</div>
+</article><article class="chapter-section" id="chapter-6">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 6</span>
+<h3 class="chapter-title">Tree-based Methods</h3>
+</div>
+<div class="chapter-content">
+<p>
+                      Tree-based methods involve stratifying or segmenting the predictor space into simple regions. While individual trees may lack predictive accuracy, ensemble methods that combine many trees can be highly effective. This chapter covers decision trees and powerful ensemble methods.
+                  </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Decision Trees</span>
+<span class="concept-tag">Regression Trees</span>
+<span class="concept-tag">Classification Trees</span>
+<span class="concept-tag">Tree Pruning</span>
+<span class="concept-tag">Bagging</span>
+<span class="concept-tag">Random Forest</span>
+<span class="concept-tag">Boosting</span>
+<span class="concept-tag">Gradient Boosting</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Tree Building:</strong> Recursive binary splitting using criteria like Gini index or entropy</li>
+<li><strong>Tree Pruning:</strong> Cost complexity pruning to avoid overfitting</li>
+<li><strong>Bagging:</strong> Bootstrap aggregating to reduce variance of tree predictions</li>
+<li><strong>Random Forest:</strong> Bagging with random feature selection at each split to decorrelate trees</li>
+<li><strong>Boosting:</strong> Sequential learning where each tree focuses on mistakes of previous trees</li>
+<li><strong>Variable Importance:</strong> Measuring predictor importance through node purity improvements</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Individual trees are interpretable but often have high variance</li>
+<li>Ensemble methods dramatically improve predictive performance</li>
+<li>Random forests are robust and require minimal tuning</li>
+<li>Boosting can achieve very high accuracy but requires careful tuning to avoid overfitting</li>
+<li>Tree-based methods handle mixed variable types and missing values naturally</li>
+<li>Feature importance scores provide valuable insights into predictor relationships</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter6">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                      Chapter 6 Lab Notebook
+                  </a>
+</div>
+</article><article class="chapter-section" id="chapter-6">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 6</span>
+<h3 class="chapter-title">Tree-based Methods</h3>
+</div>
+<div class="chapter-content">
+<p>
+                            Tree-based methods involve stratifying or segmenting the predictor space into simple regions. While individual trees may lack predictive accuracy, ensemble methods that combine many trees can be highly effective. This chapter covers decision trees and powerful ensemble methods.
+                        </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Decision Trees</span>
+<span class="concept-tag">Regression Trees</span>
+<span class="concept-tag">Classification Trees</span>
+<span class="concept-tag">Tree Pruning</span>
+<span class="concept-tag">Bagging</span>
+<span class="concept-tag">Random Forest</span>
+<span class="concept-tag">Boosting</span>
+<span class="concept-tag">Gradient Boosting</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Tree Building:</strong> Recursive binary splitting using criteria like Gini index or entropy</li>
+<li><strong>Tree Pruning:</strong> Cost complexity pruning to avoid overfitting</li>
+<li><strong>Bagging:</strong> Bootstrap aggregating to reduce variance of tree predictions</li>
+<li><strong>Random Forest:</strong> Bagging with random feature selection at each split to decorrelate trees</li>
+<li><strong>Boosting:</strong> Sequential learning where each tree focuses on mistakes of previous trees</li>
+<li><strong>Variable Importance:</strong> Measuring predictor importance through node purity improvements</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Individual trees are interpretable but often have high variance</li>
+<li>Ensemble methods dramatically improve predictive performance</li>
+<li>Random forests are robust and require minimal tuning</li>
+<li>Boosting can achieve very high accuracy but requires careful tuning to avoid overfitting</li>
+<li>Tree-based methods handle mixed variable types and missing values naturally</li>
+<li>Feature importance scores provide valuable insights into predictor relationships</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter6">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                            Chapter 6 Lab Notebook
+                        </a>
+</div>
+</article><article class="chapter-section" id="chapter-7">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 7</span>
+<h3 class="chapter-title">Support Vector Machines</h3>
+</div>
+<div class="chapter-content">
+<p>
+                      Support Vector Machines represent a powerful and flexible class of methods for both classification and regression. This chapter progresses from the simple maximal margin classifier through support vector classifiers to full support vector machines with kernel methods.
+                  </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Maximal Margin Classifier</span>
+<span class="concept-tag">Support Vector Classifier</span>
+<span class="concept-tag">Support Vector Machine</span>
+<span class="concept-tag">Kernel Trick</span>
+<span class="concept-tag">Linear Kernel</span>
+<span class="concept-tag">Polynomial Kernel</span>
+<span class="concept-tag">Radial Kernel</span>
+<span class="concept-tag">Hyperplane</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Maximal Margin Classifier:</strong> Finding the hyperplane that maximally separates two classes</li>
+<li><strong>Support Vector Classifier:</strong> Soft margin approach that allows some misclassifications</li>
+<li><strong>Kernel Methods:</strong> Implicitly mapping to higher-dimensional spaces for non-linear decision boundaries</li>
+<li><strong>Regularization Parameter C:</strong> Controlling the bias-variance trade-off in SVMs</li>
+<li><strong>Multi-class Classification:</strong> One-versus-one and one-versus-all approaches</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>SVMs work well in high-dimensional spaces and when number of dimensions exceeds samples</li>
+<li>The kernel trick allows non-linear classification without explicitly computing transformations</li>
+<li>SVMs are memory efficient as they use only support vectors for prediction</li>
+<li>Choice of kernel and parameters significantly affects performance</li>
+<li>SVMs can be sensitive to feature scaling and outliers</li>
+<li>Cross-validation is crucial for hyperparameter tuning</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter7">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                      Chapter 7 Lab Notebook
+                  </a>
+</div>
+</article><article class="chapter-section" id="chapter-7">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 7</span>
+<h3 class="chapter-title">Support Vector Machines</h3>
+</div>
+<div class="chapter-content">
+<p>
+                            Support Vector Machines represent a powerful and flexible class of methods for both classification and regression. This chapter progresses from the simple maximal margin classifier through support vector classifiers to full support vector machines with kernel methods.
+                        </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Maximal Margin Classifier</span>
+<span class="concept-tag">Support Vector Classifier</span>
+<span class="concept-tag">Support Vector Machine</span>
+<span class="concept-tag">Kernel Trick</span>
+<span class="concept-tag">Linear Kernel</span>
+<span class="concept-tag">Polynomial Kernel</span>
+<span class="concept-tag">Radial Kernel</span>
+<span class="concept-tag">Hyperplane</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Maximal Margin Classifier:</strong> Finding the hyperplane that maximally separates two classes</li>
+<li><strong>Support Vector Classifier:</strong> Soft margin approach that allows some misclassifications</li>
+<li><strong>Kernel Methods:</strong> Implicitly mapping to higher-dimensional spaces for non-linear decision boundaries</li>
+<li><strong>Regularization Parameter C:</strong> Controlling the bias-variance trade-off in SVMs</li>
+<li><strong>Multi-class Classification:</strong> One-versus-one and one-versus-all approaches</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>SVMs work well in high-dimensional spaces and when number of dimensions exceeds samples</li>
+<li>The kernel trick allows non-linear classification without explicitly computing transformations</li>
+<li>SVMs are memory efficient as they use only support vectors for prediction</li>
+<li>Choice of kernel and parameters significantly affects performance</li>
+<li>SVMs can be sensitive to feature scaling and outliers</li>
+<li>Cross-validation is crucial for hyperparameter tuning</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter7">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                            Chapter 7 Lab Notebook
+                        </a>
+</div>
+</article><article class="chapter-section" id="chapter-8">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 8</span>
+<h3 class="chapter-title">Deep Learning</h3>
+</div>
+<div class="chapter-content">
+<p>
+                      Deep learning represents the modern frontier of statistical learning, using neural networks with multiple hidden layers to model complex patterns. This chapter covers the fundamentals of neural networks, from single-layer perceptrons to deep architectures including CNNs and RNNs.
+                  </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Neural Networks</span>
+<span class="concept-tag">Multilayer Perceptron</span>
+<span class="concept-tag">Activation Functions</span>
+<span class="concept-tag">Backpropagation</span>
+<span class="concept-tag">Convolutional Neural Networks</span>
+<span class="concept-tag">Recurrent Neural Networks</span>
+<span class="concept-tag">Dropout</span>
+<span class="concept-tag">Deep Learning Frameworks</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Network Architecture:</strong> Designing layers, neurons, and connections for specific problems</li>
+<li><strong>Activation Functions:</strong> ReLU, sigmoid, and tanh functions for introducing non-linearity</li>
+<li><strong>Backpropagation:</strong> Gradient-based learning algorithm for training neural networks</li>
+<li><strong>Regularization:</strong> Dropout, weight decay, and early stopping to prevent overfitting</li>
+<li><strong>Convolutional Layers:</strong> Specialized architectures for image and spatial data</li>
+<li><strong>Recurrent Architectures:</strong> LSTM and GRU for sequential data and time series</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Deep learning excels with large datasets and complex patterns but requires significant computational resources</li>
+<li>CNNs are highly effective for image classification and computer vision tasks</li>
+<li>RNNs and their variants handle sequential data and time dependencies well</li>
+<li>Proper initialization, normalization, and regularization are crucial for training success</li>
+<li>Transfer learning and pre-trained models can significantly reduce training time and data requirements</li>
+<li>Deep learning often acts as a "black box" with limited interpretability</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter8">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                      Chapter 8 Lab Notebook
+                  </a>
+</div>
+</article><article class="chapter-section" id="chapter-8">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 8</span>
+<h3 class="chapter-title">Deep Learning</h3>
+</div>
+<div class="chapter-content">
+<p>
+                            Deep learning represents the modern frontier of statistical learning, using neural networks with multiple hidden layers to model complex patterns. This chapter covers the fundamentals of neural networks, from single-layer perceptrons to deep architectures including CNNs and RNNs.
+                        </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Neural Networks</span>
+<span class="concept-tag">Multilayer Perceptron</span>
+<span class="concept-tag">Activation Functions</span>
+<span class="concept-tag">Backpropagation</span>
+<span class="concept-tag">Convolutional Neural Networks</span>
+<span class="concept-tag">Recurrent Neural Networks</span>
+<span class="concept-tag">Dropout</span>
+<span class="concept-tag">Deep Learning Frameworks</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Network Architecture:</strong> Designing layers, neurons, and connections for specific problems</li>
+<li><strong>Activation Functions:</strong> ReLU, sigmoid, and tanh functions for introducing non-linearity</li>
+<li><strong>Backpropagation:</strong> Gradient-based learning algorithm for training neural networks</li>
+<li><strong>Regularization:</strong> Dropout, weight decay, and early stopping to prevent overfitting</li>
+<li><strong>Convolutional Layers:</strong> Specialized architectures for image and spatial data</li>
+<li><strong>Recurrent Architectures:</strong> LSTM and GRU for sequential data and time series</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Deep learning excels with large datasets and complex patterns but requires significant computational resources</li>
+<li>CNNs are highly effective for image classification and computer vision tasks</li>
+<li>RNNs and their variants handle sequential data and time dependencies well</li>
+<li>Proper initialization, normalization, and regularization are crucial for training success</li>
+<li>Transfer learning and pre-trained models can significantly reduce training time and data requirements</li>
+<li>Deep learning often acts as a "black box" with limited interpretability</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter8">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                            Chapter 8 Lab Notebook
+                        </a>
+</div>
+</article><article class="chapter-section" id="chapter-9">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 9</span>
+<h3 class="chapter-title">Unsupervised Learning</h3>
+</div>
+<div class="chapter-content">
+<p>
+                  Unsupervised learning seeks to understand data structure without labeled responses. This chapter covers principal components analysis for dimensionality reduction, clustering methods for finding hidden groups, and matrix completion techniques for handling missing data.
+              </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Principal Components Analysis</span>
+<span class="concept-tag">K-means Clustering</span>
+<span class="concept-tag">Hierarchical Clustering</span>
+<span class="concept-tag">Dendrogram</span>
+<span class="concept-tag">Linkage Methods</span>
+<span class="concept-tag">Matrix Completion</span>
+<span class="concept-tag">Dimensionality Reduction</span>
+<span class="concept-tag">Scree Plot</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Principal Components Analysis:</strong> Finding linear combinations of features that maximize variance</li>
+<li><strong>K-means Clustering:</strong> Partitioning observations into k clusters based on similarity</li>
+<li><strong>Hierarchical Clustering:</strong> Building tree-like cluster structures using linkage methods</li>
+<li><strong>Linkage Methods:</strong> Complete, single, average, and centroid linkage for hierarchical clustering</li>
+<li><strong>Matrix Completion:</strong> Using iterative algorithms to fill in missing values</li>
+<li><strong>Cluster Validation:</strong> Methods for determining optimal number of clusters</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>PCA is useful for visualization, data compression, and noise reduction</li>
+<li>K-means requires pre-specifying the number of clusters and can be sensitive to initialization</li>
+<li>Hierarchical clustering provides insight into data structure at multiple scales</li>
+<li>Standardization of variables is often crucial in unsupervised learning</li>
+<li>Results can be highly sensitive to distance metrics and linkage methods chosen</li>
+<li>Validation of unsupervised results is challenging due to lack of ground truth</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter9">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                  Chapter 9 Lab Notebook
+              </a>
+</div>
+</article><article class="chapter-section" id="chapter-9">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 9</span>
+<h3 class="chapter-title">Unsupervised Learning</h3>
+</div>
+<div class="chapter-content">
+<p>
+                        Unsupervised learning seeks to understand data structure without labeled responses. This chapter covers principal components analysis for dimensionality reduction, clustering methods for finding hidden groups, and matrix completion techniques for handling missing data.
+                    </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Principal Components Analysis</span>
+<span class="concept-tag">K-means Clustering</span>
+<span class="concept-tag">Hierarchical Clustering</span>
+<span class="concept-tag">Dendrogram</span>
+<span class="concept-tag">Linkage Methods</span>
+<span class="concept-tag">Matrix Completion</span>
+<span class="concept-tag">Dimensionality Reduction</span>
+<span class="concept-tag">Scree Plot</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Principal Components Analysis:</strong> Finding linear combinations of features that maximize variance</li>
+<li><strong>K-means Clustering:</strong> Partitioning observations into k clusters based on similarity</li>
+<li><strong>Hierarchical Clustering:</strong> Building tree-like cluster structures using linkage methods</li>
+<li><strong>Linkage Methods:</strong> Complete, single, average, and centroid linkage for hierarchical clustering</li>
+<li><strong>Matrix Completion:</strong> Using iterative algorithms to fill in missing values</li>
+<li><strong>Cluster Validation:</strong> Methods for determining optimal number of clusters</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>PCA is useful for visualization, data compression, and noise reduction</li>
+<li>K-means requires pre-specifying the number of clusters and can be sensitive to initialization</li>
+<li>Hierarchical clustering provides insight into data structure at multiple scales</li>
+<li>Standardization of variables is often crucial in unsupervised learning</li>
+<li>Results can be highly sensitive to distance metrics and linkage methods chosen</li>
+<li>Validation of unsupervised results is challenging due to lack of ground truth</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter9">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                        Chapter 9 Lab Notebook
+                    </a>
+</div>
+</article><article class="chapter-section" id="chapter-10">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 10</span>
+<h3 class="chapter-title">Text Mining</h3>
+</div>
+<div class="chapter-content">
+<p>
+                            Text mining applies statistical learning methods to textual data, enabling analysis of documents, social media content, and other unstructured text. This chapter covers text preprocessing, feature extraction, document classification, sentiment analysis, and modern approaches to natural language processing.
+                        </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Text Preprocessing</span>
+<span class="concept-tag">Tokenization</span>
+<span class="concept-tag">Bag of Words</span>
+<span class="concept-tag">TF-IDF</span>
+<span class="concept-tag">Document Classification</span>
+<span class="concept-tag">Sentiment Analysis</span>
+<span class="concept-tag">Topic Modeling</span>
+<span class="concept-tag">N-grams</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Text Preprocessing:</strong> Cleaning, tokenization, stemming, and stopword removal</li>
+<li><strong>Feature Extraction:</strong> Converting text to numerical representations using bag-of-words and TF-IDF</li>
+<li><strong>Document Classification:</strong> Applying supervised learning methods to categorize documents</li>
+<li><strong>Sentiment Analysis:</strong> Determining emotional tone and opinion polarity in text</li>
+<li><strong>Topic Modeling:</strong> Discovering latent themes and topics in document collections</li>
+<li><strong>N-gram Analysis:</strong> Capturing word sequences and local context</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Text preprocessing significantly impacts downstream analysis quality</li>
+<li>High-dimensional sparse matrices are common in text analysis</li>
+<li>TF-IDF often outperforms simple bag-of-words for document classification</li>
+<li>Domain-specific preprocessing and feature engineering are crucial</li>
+<li>Regularization methods are essential due to high dimensionality</li>
+<li>Modern deep learning approaches can capture semantic relationships better than traditional methods</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter10">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                            Chapter 10 Lab Notebook
+                        </a>
+</div>
+</article><article class="chapter-section" id="chapter-10">
+<div class="chapter-header">
+<span class="chapter-number">Chapter 10</span>
+<h3 class="chapter-title">Text Mining</h3>
+</div>
+<div class="chapter-content">
+<p>
+                  Text mining applies statistical learning methods to textual data, enabling analysis of documents, social media content, and other unstructured text. This chapter covers text preprocessing, feature extraction, document classification, sentiment analysis, and modern approaches to natural language processing.
+              </p>
+<div class="key-concepts">
+<h4>Key Concepts:</h4>
+<div class="concepts-list">
+<span class="concept-tag">Text Preprocessing</span>
+<span class="concept-tag">Tokenization</span>
+<span class="concept-tag">Bag of Words</span>
+<span class="concept-tag">TF-IDF</span>
+<span class="concept-tag">Document Classification</span>
+<span class="concept-tag">Sentiment Analysis</span>
+<span class="concept-tag">Topic Modeling</span>
+<span class="concept-tag">N-grams</span>
+</div>
+</div>
+<div class="techniques-takeaways">
+<h4>Main Ideas and Techniques:</h4>
+<ul>
+<li><strong>Text Preprocessing:</strong> Cleaning, tokenization, stemming, and stopword removal</li>
+<li><strong>Feature Extraction:</strong> Converting text to numerical representations using bag-of-words and TF-IDF</li>
+<li><strong>Document Classification:</strong> Applying supervised learning methods to categorize documents</li>
+<li><strong>Sentiment Analysis:</strong> Determining emotional tone and opinion polarity in text</li>
+<li><strong>Topic Modeling:</strong> Discovering latent themes and topics in document collections</li>
+<li><strong>N-gram Analysis:</strong> Capturing word sequences and local context</li>
+</ul>
+<h4>Key Takeaways:</h4>
+<ol>
+<li>Text preprocessing significantly impacts downstream analysis quality</li>
+<li>High-dimensional sparse matrices are common in text analysis</li>
+<li>TF-IDF often outperforms simple bag-of-words for document classification</li>
+<li>Domain-specific preprocessing and feature engineering are crucial</li>
+<li>Regularization methods are essential due to high dimensionality</li>
+<li>Modern deep learning approaches can capture semantic relationships better than traditional methods</li>
+</ol>
+</div>
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs/tree/main/chapter10">
+<svg class="github-icon" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                  Chapter 10 Lab Notebook
+              </a>
+</div>
+</article></section>
+<!-- Chapter 2: Linear Regression -->
+
+<!-- Chapter 3: Classification -->
+
+<!-- Chapter 4: Resampling Methods -->
+
+<!-- Chapter 5: Linear Model Selection and Regularization -->
+
+<!-- Chapter 6: Tree-based Methods -->
+
+<!-- Chapter 7: Support Vector Machines -->
+
+<!-- Chapter 8: Deep Learning -->
+
+<!-- Chapter 9: Unsupervised Learning -->
+
+<!-- Chapter 10: Text Mining -->
+
+<!-- 6. Algorithm Lists (Requirement 6) -->
+<section id="algorithms">
+<h2>🔧 Algorithm Lists by Task</h2>
+<div class="algorithms-section">
+<!-- Regression Algorithms -->
+<div class="algorithm-category">
+<h3 class="category-title">
+<svg class="category-icon" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+<polyline points="7,10 12,15 17,10"></polyline>
+<line x1="12" x2="12" y1="15" y2="3"></line>
+</svg>
+                            Regression Algorithms
+                        </h3>
+<ul class="algorithm-list">
+<li>Simple Linear Regression</li>
+<li>Multiple Linear Regression</li>
+<li>Polynomial Regression</li>
+<li>Ridge Regression (L2 Regularization)</li>
+<li>Lasso Regression (L1 Regularization)</li>
+<li>Elastic Net Regression</li>
+<li>Principal Components Regression (PCR)</li>
+<li>Partial Least Squares (PLS) Regression</li>
+<li>Regression Trees</li>
+<li>Random Forest Regression</li>
+<li>Gradient Boosting Regression</li>
+<li>AdaBoost Regression</li>
+<li>Support Vector Regression (SVR)</li>
+<li>Neural Network Regression</li>
+<li>Deep Learning Regression</li>
+</ul>
+</div>
+<!-- Classification Algorithms -->
+<div class="algorithm-category">
+<h3 class="category-title">
+<svg class="category-icon" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<path d="M9 11H1v12h8V11z"></path>
+<path d="M23 11h-8v12h8V11z"></path>
+<path d="M16 3H8v8h8V3z"></path>
+</svg>
+                            Classification Algorithms
+                        </h3>
+<ul class="algorithm-list">
+<li>Logistic Regression</li>
+<li>Multinomial Logistic Regression</li>
+<li>Linear Discriminant Analysis (LDA)</li>
+<li>Quadratic Discriminant Analysis (QDA)</li>
+<li>Naive Bayes Classifier</li>
+<li>K-Nearest Neighbors (KNN)</li>
+<li>Classification Trees</li>
+<li>Random Forest Classification</li>
+<li>AdaBoost Classification</li>
+<li>Gradient Boosting Classification</li>
+<li>Support Vector Classifier (Linear SVM)</li>
+<li>Support Vector Machine (Non-linear SVM)</li>
+<li>Neural Network Classification</li>
+<li>Deep Learning Classification</li>
+<li>Convolutional Neural Networks (CNN)</li>
+<li>Recurrent Neural Networks (RNN)</li>
+</ul>
+</div>
+<!-- Unsupervised Learning Algorithms -->
+<div class="algorithm-category">
+<h3 class="category-title">
+<svg class="category-icon" fill="none" stroke="currentColor" stroke-width="2" viewbox="0 0 24 24">
+<circle cx="12" cy="12" r="3"></circle>
+<path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+</svg>
+                            Unsupervised Learning Algorithms
+                        </h3>
+<ul class="algorithm-list">
+<li>Principal Components Analysis (PCA)</li>
+<li>K-means Clustering</li>
+<li>K-means++ Clustering</li>
+<li>Hierarchical Clustering (Agglomerative)</li>
+<li>Complete Linkage Clustering</li>
+<li>Single Linkage Clustering</li>
+<li>Average Linkage Clustering</li>
+<li>Ward Linkage Clustering</li>
+<li>DBSCAN Clustering</li>
+<li>Gaussian Mixture Models</li>
+<li>Matrix Completion</li>
+<li>Independent Component Analysis (ICA)</li>
+<li>t-SNE (t-Distributed Stochastic Neighbor Embedding)</li>
+<li>Factor Analysis</li>
+<li>Latent Dirichlet Allocation (LDA) for Topic Modeling</li>
+</ul>
+</div>
+</div>
+</section>
+<!-- GitHub Repository Section -->
+<section id="github-repository">
+<h2>💻 GitHub Repository</h2>
+<div class="overview-content">
+<p>
+                        All laboratory exercises, practical implementations, and datasets for this course are available in our comprehensive GitHub repository. The repository contains detailed Jupyter notebooks for each chapter, complete with step-by-step implementations, explanations, and exercises using Python and popular machine learning libraries.
+                    </p>
+<div style="text-align: center; margin: 2rem 0;">
+<a class="github-link" href="https://github.com/IRUMVAEmmanuel1/isl-python-labs" style="font-size: 1.2rem; padding: 1.5rem 3rem;">
+<svg class="github-icon" style="width: 24px; height: 24px;" viewbox="0 0 24 24">
+<path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.30 3.297-1.30.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"></path>
+</svg>
+                            Access Complete GitHub Repository
+                        </a>
+</div>
+<div class="algorithms-section">
+<div class="algorithm-category">
+<h4 style="color: var(--primary-green); margin-bottom: 1rem;">📁 Repository Structure</h4>
+<ul style="margin-left: 1.5rem; line-height: 2;">
+<li><strong>Chapter Folders:</strong> Each chapter has its own directory with notebooks and data</li>
+<li><strong>Datasets:</strong> All datasets used in the book exercises and labs</li>
+<li><strong>Solutions:</strong> Complete solutions to all exercises and problems</li>
+<li><strong>Requirements:</strong> Python environment setup and dependency management</li>
+<li><strong>Documentation:</strong> Comprehensive README files and usage instructions</li>
+</ul>
+</div>
+<div class="algorithm-category">
+<h4 style="color: var(--primary-green); margin-bottom: 1rem;">🛠️ Technical Requirements</h4>
+<ul style="margin-left: 1.5rem; line-height: 2;">
+<li><strong>Python:</strong> Version 3.8 or higher</li>
+<li><strong>Core Libraries:</strong> scikit-learn, pandas, numpy, matplotlib</li>
+<li><strong>Specialized Packages:</strong> ISLP, seaborn, scipy, statsmodels</li>
+<li><strong>Deep Learning:</strong> tensorflow, keras for neural network chapters</li>
+<li><strong>Environment:</strong> Jupyter Notebook or Jupyter Lab recommended</li>
+</ul>
+</div>
+</div>
+<div style="background: var(--very-light-green); padding: 2rem; border-radius: var(--border-radius); margin: 2rem 0; border-left: 5px solid var(--primary-green);">
+<h4 style="color: var(--dark-green); margin-bottom: 1rem;">🚀 Quick Start Guide</h4>
+<ol style="margin-left: 1.5rem; line-height: 1.8;">
+<li><strong>Clone the Repository:</strong> <code style="background: var(--white); padding: 0.2rem 0.5rem; border-radius: 4px;">git clone https://irumvaemmanuel1.github.io/Data-Mining/</code></li>
+<li><strong>Install Dependencies:</strong> <code style="background: var(--white); padding: 0.2rem 0.5rem; border-radius: 4px;">pip install -r requirements.txt</code></li>
+<li><strong>Launch Jupyter:</strong> <code style="background: var(--white); padding: 0.2rem 0.5rem; border-radius: 4px;">jupyter lab</code></li>
+<li><strong>Navigate to Chapters:</strong> Open individual chapter folders to access specific notebooks</li>
+<li><strong>Follow Along:</strong> Execute cells sequentially and modify code to experiment</li>
+</ol>
+</div>
+</div>
+</section>
+</div>
+</main>
+<!-- Footer -->
+<footer>
+<div class="container">
+<div class="footer-content">
+<div class="footer-section">
+<h3>About This Project</h3>
+<p>This comprehensive HTML summary was created as part of the MSDA9223 course requirements at Adventist University of Central Africa. It provides a complete overview of "Introduction to Statistical Learning" with practical Python implementations.</p>
+</div>
+<div class="footer-section">
+<h3>Course Information</h3>
+<ul class="footer-links">
+<li><strong>Course:</strong> Data Mining and Information Retrieval.</li>
+<li><strong>Code:</strong> MSDA9223</li>
+<li><strong>Instructor:</strong> Dr. Pacifique Nizeyimana</li>
+<li><strong>Institution:</strong> Adventist University of Central Africa</li>
+<li><strong>Academic Year:</strong> 2024-2025, Semester 2</li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Book Resources</h3>
+<ul class="footer-links">
+<li><a href="https://www.statlearning.com/">Official Book Website</a></li>
+<li><a href="https://github.com/intro-stat-learning/ISLP">Official ISLP Python Package</a></li>
+<li><a href="https://scikit-learn.org/">Scikit-learn Documentation</a></li>
+<li><a href="https://pandas.pydata.org/">Pandas Documentation</a></li>
+<li><a href="https://numpy.org/">NumPy Documentation.</a></li>
+</ul>
+</div>
+<div class="footer-section">
+<h3>Additional Resources</h3>
+<ul class="footer-links">
+<li><a href="https://matplotlib.org/">Matplotlib Documentation</a></li>
+<li><a href="https://seaborn.pydata.org/">Seaborn Documentation</a></li>
+<li><a href="https://jupyter.org/">Jupyter Project</a></li>
+<li><a href="https://www.kaggle.com/">Kaggle Datasets</a></li>
+<li><a href="https://github.com/">GitHub Platform</a></li>
+</ul>
+</div>
+</div>
+<div style="text-align: center; padding-top: 2rem; border-top: 1px solid #4b5563; margin-top: 2rem;">
+<p>© 2025 Adventist University of Central Africa | Created for Educational Purposes</p>
+<p style="margin-top: 0.5rem; opacity: 0.8;">
+                    "Introduction to Statistical Learning with Applications in Python" by James, Witten, Hastie, Tibshirani, and Taylor
+                </p>
+<p style="margin-top: 0.5rem; font-size: 0.9rem; opacity: 0.7;">
+                    This page demonstrates comprehensive HTML structure and styling for web scraping learning objectives.
+                </p>
+</div>
+</div>
+</footer>
+<!-- JavaScript for Interactivity -->
+<script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Add intersection observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all chapter sections and algorithm categories
+        document.querySelectorAll('.chapter-section, .algorithm-category').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'all 0.6s ease';
+            observer.observe(el);
+        });
+
+        // Add click handlers for table of contents
+        document.querySelectorAll('.toc-item').forEach(item => {
+            item.addEventListener('click', function() {
+                // Add visual feedback
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        });
+
+        // Add hover effects for concept tags
+        document.querySelectorAll('.concept-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.1) rotate(2deg)';
+            });
+            
+            tag.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) rotate(0deg)';
+            });
+        });
+
+        // Highlight current section in navigation
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 200)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Add active class styling
+        const style = document.createElement('style');
+        style.textContent = `
+            .nav-links a.active {
+                background: var(--primary-green);
+                color: white;
+                transform: translateY(-2px);
+                box-shadow: var(--shadow);
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize page with fade-in effect
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+            document.body.style.transform = 'translateY(0)';
+        });
+
+        // Set initial body styles for load animation
+        document.body.style.opacity = '0';
+        document.body.style.transform = 'translateY(20px)';
+        document.body.style.transition = 'all 0.5s ease';
+
+        // Add print styles
+        const printStyle = document.createElement('style');
+        printStyle.textContent = `
+            @media print {
+                nav, footer { display: none; }
+                section { page-break-inside: avoid; }
+                .chapter-section { page-break-before: always; }
+                .github-link { display: none; }
+            }
+        `;
+        document.head.appendChild(printStyle);
+    </script>
+</body>
+</html>.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/&gt;
+                            
+                            Chapter 3 Lab Notebook
+                        
+
+
+<!-- Chapter 4: Resampling Methods -->
+
+<!-- Chapter 5: Linear Model Selection and Regularization -->
+
+<!-- Chapter 6: Tree-based Methods -->
+
+<!-- Chapter 7: Support Vector Machines -->
+
+<!-- Chapter 8: Deep Learning -->
+
+<!-- Chapter 9: Unsupervised Learning -->
+
+<!-- Chapter 1: Introduction -->
+
+<!-- Chapter 2: Linear Regression -->
+
+<!-- Chapter 3: Classification -->
